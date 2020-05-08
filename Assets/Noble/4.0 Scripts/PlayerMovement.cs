@@ -15,7 +15,7 @@ namespace Noble {
         public float speed;
         public float controlFactor;
         public float turnSpeed;
-
+        public float gravity;
 
         [Header("Input Hooks")]
         public Vector2 leftMoveInput = Vector2.zero;
@@ -51,10 +51,19 @@ namespace Noble {
             }
 
             angle += (leftMoveInput.y - rightMoveInput.y)*turnSpeed * Time.fixedDeltaTime;
-
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.up);
+
+            if (controller.isGrounded) {
+                currentVelocity.y = 0;
+            }
+            currentVelocity.y -= gravity * Time.fixedDeltaTime;
+
+
             vel = transform.TransformDirection(vel);
             currentVelocity = Vector3.Lerp(currentVelocity, vel, controlFactor * Time.fixedDeltaTime);
+
+            
+
             controller.Move(currentVelocity);
         }
 

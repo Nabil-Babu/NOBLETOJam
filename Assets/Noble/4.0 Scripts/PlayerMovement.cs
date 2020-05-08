@@ -13,14 +13,22 @@ namespace Noble {
 
         [Header("Settings")]
         public float speed;
+        public float controlFactor;
+        public float turnSpeed;
+
 
         [Header("Input Hooks")]
-        public Vector2 moveInput = Vector2.zero;
+        public Vector2 leftMoveInput = Vector2.zero;
+        public Vector2 rightMoveInput = Vector2.zero;
+        
 
         // autowired
         private CharacterController controller;
-        private Vector3 velocity = Vector3.zero;
-        
+        private Vector3 currentVelocity = Vector3.zero;
+
+        [Header("Runtime Values")]
+        [SerializeField]
+        private float angle;
 
         // Start is called before the first frame update
         void Start() {
@@ -29,16 +37,37 @@ namespace Noble {
 
         // Update is called once per frame
         void FixedUpdate() {
-            velocity.x = moveInput.x * speed * Time.fixedDeltaTime;
-            velocity.z = moveInput.y * speed * Time.fixedDeltaTime;
-            controller.Move(velocity);
+            var vel = new Vector3();
+            //vel.x = leftMoveInput.x * speed * Time.fixedDeltaTime;
+            //vel.z = leftMoveInput.y * speed * Time.fixedDeltaTime;
+
+
+            if (leftMoveInput.y > 0 && rightMoveInput.y > 0) {
+                // fwd
+                vel.z = (leftMoveInput.y + rightMoveInput.y) * speed * Time.fixedDeltaTime;
+            } else if (leftMoveInput.y < 0 && rightMoveInput.y < 0) {
+                // back
+                vel.z = (leftMoveInput.y + rightMoveInput.y) * speed * Time.fixedDeltaTime;
+            }
+
+            angle += (leftMoveInput.y - rightMoveInput.y)*turnSpeed * Time.fixedDeltaTime;
+
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.up);
+            vel = transform.TransformDirection(vel);
+            currentVelocity = Vector3.Lerp(currentVelocity, vel, controlFactor * Time.fixedDeltaTime);
+            controller.Move(currentVelocity);
         }
 
-        public void OnMove(InputValue input) {
-            moveInput = input.Get<Vector2>();
+
+        
+
+        public void OnMoveLeft(InputValue input) {
+            leftMoveInput = input.Get<Vector2>();
         }
 
-
+        public void OnMoveRight(InputValue input) {
+            rightMoveInput = input.Get<Vector2>();
+        }
     }
 
 }

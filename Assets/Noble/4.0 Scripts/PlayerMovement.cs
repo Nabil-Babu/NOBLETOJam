@@ -11,22 +11,27 @@ namespace Noble {
 
     public class PlayerMovement : MonoBehaviour {
 
-        public Vector2 moveInput = Vector2.zero;
-        private CharacterController controller;
+        [Header("Settings")]
+        public float speed;
 
-        private Vector3 speed = Vector3.zero;  
+        [Header("Input Hooks")]
+        public Vector2 moveInput = Vector2.zero;
+
+        // autowired
+        private CharacterController controller;
+        private Vector3 velocity = Vector3.zero;
+        
 
         // Start is called before the first frame update
         void Start() {
-            speed = new Vector3(10,0,10);
             controller = GetComponent<CharacterController>();
         }
 
         // Update is called once per frame
         void FixedUpdate() {
-
-
-            controller.Move(new Vector3(moveInput.x, 0, moveInput.y));
+            velocity.x = moveInput.x * speed * Time.fixedDeltaTime;
+            velocity.z = moveInput.y * speed * Time.fixedDeltaTime;
+            controller.Move(velocity);
         }
 
         public void OnMove(InputValue input) {

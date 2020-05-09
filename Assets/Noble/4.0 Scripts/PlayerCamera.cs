@@ -30,9 +30,10 @@ public class PlayerCamera : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         yawAngle += lookInput.x * lookSpeed * Time.deltaTime;
+        yawAxis.transform.localRotation = Quaternion.AngleAxis(yawAngle, Vector3.up);
+
         pitchAngle += lookInput.y * lookSpeed * Time.deltaTime;
-        yawAxis.transform.rotation = Quaternion.AngleAxis(yawAngle, Vector3.up);
-        pitchAxis.transform.rotation = Quaternion.AngleAxis(pitchAngle, Vector3.right);
+        pitchAxis.transform.localRotation = Quaternion.AngleAxis(pitchAngle, Vector3.right);
     }
 
     public void OnLook(InputValue input) {

@@ -26,10 +26,6 @@ namespace Noble {
         private CharacterController controller;
         private Vector3 currentVelocity = Vector3.zero;
 
-        [Header("Players Parts")]
-        // Head
-        public GameObject head;
-
         [Header("Runtime Values")]
         [SerializeField]
         private float angle;
@@ -54,8 +50,6 @@ namespace Noble {
             var angle = new Vector3();
 
             angle.x = lookInput.x * turnSpeed * Time.fixedDeltaTime;
-
-            head.transform.rotation = Quaternion.AngleAxis(angle.x, Vector3.up);
 
             currentVelocity = Vector3.Lerp(currentVelocity, vel, controlFactor * Time.fixedDeltaTime);
 

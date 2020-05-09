@@ -18,15 +18,13 @@ public class HammerControls : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Colliding");
-        if (collision.gameObject.tag == "Enemy")
+        
+        if(collision.transform.parent.tag == "Enemy")
         {
-            Debug.Log("Colliding  with Enemy");
+            Destroy(collision.transform.parent.gameObject);
         }
+       
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("Triggering");
-    }
+
 }

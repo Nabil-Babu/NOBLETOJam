@@ -404,7 +404,7 @@ GameObject:
   m_Component:
   - component: {fileID: 418781615}
   m_Layer: 0
-  m_Name: '---Environment'
+  m_Name: ---Environment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -749,6 +749,7 @@ GameObject:
   - component: {fileID: 812730135}
   - component: {fileID: 812730134}
   - component: {fileID: 812730133}
+  - component: {fileID: 812730136}
   m_Layer: 8
   m_Name: Hammer
   m_TagString: Untagged
@@ -831,6 +832,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 812730131}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &812730136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812730131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1902be5116284a4cadf08d210725d5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &858194217
 GameObject:
   m_ObjectHideFlags: 0
@@ -1023,7 +1036,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1173460999}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.6988025, y: 9.64, z: 22.74}
+  m_LocalPosition: {x: 4.6988025, y: 1.38, z: 22.74}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 474252916}
@@ -1256,6 +1269,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Stadium
+      objectReference: {fileID: 0}
+    - target: {fileID: 7554743925908454105, guid: e779c5359515b4bcab2b3f54930b395a,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e779c5359515b4bcab2b3f54930b395a, type: 3}

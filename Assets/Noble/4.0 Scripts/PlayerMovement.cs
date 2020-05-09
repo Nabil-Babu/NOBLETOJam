@@ -26,7 +26,6 @@ namespace Noble {
         private CharacterController controller;
         private Vector3 currentVelocity = Vector3.zero;
 
-        
         [Header("Runtime Values")]
         [SerializeField]
         private float angle;
@@ -52,8 +51,6 @@ namespace Noble {
 
             angle.x = lookInput.x * turnSpeed * Time.fixedDeltaTime;
 
-            vel = transform.TransformDirection(vel); // adjust for current fwd direction
-           
             currentVelocity = Vector3.Lerp(currentVelocity, vel, controlFactor * Time.fixedDeltaTime);
 
             controller.Move(currentVelocity);

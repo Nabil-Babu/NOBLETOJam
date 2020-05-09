@@ -51,6 +51,8 @@ namespace Noble {
 
             angle.x = lookInput.x * turnSpeed * Time.fixedDeltaTime;
 
+            vel = transform.TransformDirection(vel);
+
             currentVelocity = Vector3.Lerp(currentVelocity, vel, controlFactor * Time.fixedDeltaTime);
 
             controller.Move(currentVelocity);

@@ -18,13 +18,17 @@ namespace Noble {
         public float gravity;
 
         [Header("Input Hooks")]
-        public Vector2 leftMoveInput = Vector2.zero;
-        public Vector2 rightMoveInput = Vector2.zero;
+        public Vector2 moveInput = Vector2.zero;
+        public Vector2 lookInput = Vector2.zero;
         
 
         // autowired
         private CharacterController controller;
         private Vector3 currentVelocity = Vector3.zero;
+
+        [Header("Players Parts")]
+        // Head
+        public GameObject head;
 
         [Header("Runtime Values")]
         [SerializeField]
@@ -38,31 +42,22 @@ namespace Noble {
         // Update is called once per frame
         void FixedUpdate() {
             var vel = new Vector3();
-            //vel.x = leftMoveInput.x * speed * Time.fixedDeltaTime;
-            //vel.z = leftMoveInput.y * speed * Time.fixedDeltaTime;
+            vel.x = moveInput.x * speed * Time.fixedDeltaTime;
+            vel.z = moveInput.y * speed * Time.fixedDeltaTime;
 
-
-            if (leftMoveInput.y > 0 && rightMoveInput.y > 0) {
-                // fwd
-                vel.z = (leftMoveInput.y + rightMoveInput.y) * speed * Time.fixedDeltaTime;
-            } else if (leftMoveInput.y < 0 && rightMoveInput.y < 0) {
-                // back
-                vel.z = (leftMoveInput.y + rightMoveInput.y) * speed * Time.fixedDeltaTime;
-            }
-
-            angle += (leftMoveInput.y - rightMoveInput.y)*turnSpeed * Time.fixedDeltaTime;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.up);
 
             if (controller.isGrounded) {
                 currentVelocity.y = 0;
             }
             currentVelocity.y -= gravity * Time.fixedDeltaTime;
 
+            var angle = new Vector3();
 
-            vel = transform.TransformDirection(vel);
+            angle.x = lookInput.x * turnSpeed * Time.fixedDeltaTime;
+
+            head.transform.rotation = Quaternion.AngleAxis(angle.x, Vector3.up);
+
             currentVelocity = Vector3.Lerp(currentVelocity, vel, controlFactor * Time.fixedDeltaTime);
-
-            
 
             controller.Move(currentVelocity);
         }
@@ -70,12 +65,12 @@ namespace Noble {
 
         
 
-        public void OnMoveLeft(InputValue input) {
-            leftMoveInput = input.Get<Vector2>();
+        public void OnMove(InputValue input) {
+            moveInput = input.Get<Vector2>();
         }
 
-        public void OnMoveRight(InputValue input) {
-            rightMoveInput = input.Get<Vector2>();
+        public void OnLook(InputValue input) {
+            lookInput = input.Get<Vector2>();
         }
     }
 

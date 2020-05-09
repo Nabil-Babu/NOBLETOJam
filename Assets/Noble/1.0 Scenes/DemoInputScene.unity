@@ -404,7 +404,7 @@ GameObject:
   m_Component:
   - component: {fileID: 418781615}
   m_Layer: 0
-  m_Name: '---Environment'
+  m_Name: ---Environment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -601,7 +601,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8e129e65eea1445ebc421994f3988a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 15
   controlFactor: 0.5
   turnSpeed: 20
   gravity: 9
@@ -696,6 +696,20 @@ MonoBehaviour:
   lookInput: {x: 0, y: 0}
   yawAngle: 0
   camHeight: 0
+--- !u!114 &609325049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 609325043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c87ee4526d7843e1a9f2bc0e4b8fc8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsMode: 1
+  directPower: 5
 --- !u!1 &812730131
 GameObject:
   m_ObjectHideFlags: 0
@@ -820,20 +834,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!114 &609325049
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 609325043}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c87ee4526d7843e1a9f2bc0e4b8fc8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  physicsMode: 1
-  directPower: 5
 --- !u!1 &841924118
 GameObject:
   m_ObjectHideFlags: 0

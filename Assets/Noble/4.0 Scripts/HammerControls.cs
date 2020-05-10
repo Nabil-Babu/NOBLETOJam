@@ -21,7 +21,8 @@ public class HammerControls : MonoBehaviour
         
         if(collision.transform.parent.tag == "Enemy")
         {
-            Destroy(collision.transform.parent.gameObject);
+            Destroy(collision.gameObject.transform.parent.gameObject);
+            collision.gameObject.GetComponentInParent<MoveToPlayer>().PlayDeath();
         }
        
     }

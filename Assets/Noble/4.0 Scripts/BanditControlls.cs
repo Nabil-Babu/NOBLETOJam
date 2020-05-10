@@ -2,16 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Rendering;
+using UnityEngine.Video;
 
 public class BanditControlls : MonoBehaviour
 {
+    [Header("Settings")]
+    public float minAttackDistance;
+    public float attackCoolDown;
 
-    public Transform player;
-    private NavMeshAgent agent;
-    private bool isAlive = true; 
+    [Header("States")]
+    [SerializeField]
+    private bool isAttacking = false;
+    [SerializeField]
+    private bool isAlive = true;
+
 
     [Header("Dependencies")]
     public Animator animator;
+    public Transform player;
+    private NavMeshAgent agent;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +39,19 @@ public class BanditControlls : MonoBehaviour
             float aniVel = agent.velocity.magnitude;
             aniVel = Mathf.Clamp(aniVel * 10, 0, 1);
             animator.SetFloat("Blend", aniVel);
+            if(agent.remainingDistance < minAttackDistance && agent.remainingDistance > 0)
+            {
+                if(!isAttacking)
+                {
+                    Attack();
+                    isAttacking = true;
+                    agent.isStopped = true; 
+                }
+            } 
+            else
+            {
+                agent.isStopped = false;
+            }
         }
     }
 
@@ -42,5 +65,17 @@ public class BanditControlls : MonoBehaviour
     private void Death()
     {
         Destroy(this.gameObject);
+    }
+
+    private void Attack()
+    {
+        animator.SetTrigger("Attack");
+        StartCoroutine(AttackTimer());
+    }
+
+    IEnumerator AttackTimer()
+    {
+        yield return new WaitForSeconds(attackCoolDown);
+        isAttacking = false; 
     }
 }

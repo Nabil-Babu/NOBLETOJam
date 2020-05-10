@@ -68,8 +68,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a17ebebeb30ad94fbda1f40736259e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  minAttackDistance: 2
+  attackCoolDown: 1.01
+  isAttacking: 0
+  isAlive: 1
   animator: {fileID: 5064645583014194542}
+  player: {fileID: 0}
 --- !u!114 &9104302057493198714
 MonoBehaviour:
   m_ObjectHideFlags: 0

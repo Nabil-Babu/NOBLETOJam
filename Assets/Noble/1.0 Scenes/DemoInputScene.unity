@@ -435,7 +435,7 @@ GameObject:
   m_Component:
   - component: {fileID: 418781615}
   m_Layer: 0
-  m_Name: '---Environment'
+  m_Name: ---Environment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -664,6 +664,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1117933510}
   hammer: {fileID: 0}
+  hammerCooldown: 2.5
+  hammerReady: 1
 --- !u!1 &841924118
 GameObject:
   m_ObjectHideFlags: 0

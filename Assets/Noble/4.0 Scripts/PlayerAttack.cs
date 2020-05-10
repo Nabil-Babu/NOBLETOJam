@@ -10,8 +10,11 @@ public class PlayerAttack : MonoBehaviour
     private int ANIM_ATTACK_TRIGGER = Animator.StringToHash("Attack");
 
     public Animator animator;
+    public HammerControls hammer;
+    public float hammerCooldown = 1.0f; 
 
-    public HammerControls hammer;  
+    [SerializeField]
+    private bool hammerReady = true; 
 
 
 
@@ -22,13 +25,24 @@ public class PlayerAttack : MonoBehaviour
     }
 
     public void OnAttack(InputValue input) {
-        animator.SetTrigger(ANIM_ATTACK_TRIGGER);
-        Invoke("SwingHammer", 0.5f);
+        if(hammerReady)
+        {
+            hammerReady = false;
+            StartCoroutine(HammerTimer());
+            animator.SetTrigger(ANIM_ATTACK_TRIGGER);
+            Invoke("SwingHammer", 0.5f);
+        }
         
     }
 
     public void SwingHammer()
     {
         hammer.KillTarget();
+    }
+
+    IEnumerator HammerTimer()
+    {
+        yield return new WaitForSeconds(hammerCooldown);
+        hammerReady = true; 
     }
 }

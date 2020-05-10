@@ -4,28 +4,44 @@ using UnityEngine;
 
 public class HammerControls : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject target;
+    public bool killBoxOccupied = true;
 
-    // Update is called once per frame
-    void Update()
+    void OnTriggerEnter(Collider other)
     {
-        
-    }
-
-    void OnCollisionEnter(Collision collision)
-    {
-        
-        if(collision.transform.parent.tag == "Enemy")
+        if (other.gameObject.transform.parent.tag == "Enemy")
         {
-            Destroy(collision.gameObject.transform.parent.gameObject);
-            collision.gameObject.GetComponentInParent<MoveToPlayer>().PlayDeath();
+            Debug.Log("Kill Box Entered");
+            target = other.transform.parent.gameObject;
+            killBoxOccupied = true;
         }
-       
     }
 
+    void OnTriggerExit(Collider other)
+    {
+        
+        if (other.gameObject.transform.parent.tag == "Enemy")
+        {
+            Debug.Log("Kill Box Exited");
+            
+        }
+    }
 
+    void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.transform.parent.tag == "Enemy")
+        {
+            Debug.Log("Kill Box Occupied");
+            killBoxOccupied = true;
+        }
+    }
+
+    public void KillTarget()
+    {
+        Debug.Log(killBoxOccupied);
+        if(killBoxOccupied == true)
+        {
+            Debug.Log("Kill!");
+        }
+    }
 }

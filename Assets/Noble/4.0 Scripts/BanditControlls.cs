@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MoveToPlayer : MonoBehaviour
+public class BanditControlls : MonoBehaviour
 {
 
     public Transform player;
     private NavMeshAgent agent;
+    private bool isAlive = true; 
 
     [Header("Dependencies")]
     public Animator animator;
@@ -22,14 +23,24 @@ public class MoveToPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        agent.destination = player.position;
-        float aniVel = agent.velocity.magnitude;
-        aniVel = Mathf.Clamp(aniVel * 10, 0, 1);
-        animator.SetFloat("Blend", aniVel);
+        if(isAlive)
+        {
+            agent.destination = player.position;
+            float aniVel = agent.velocity.magnitude;
+            aniVel = Mathf.Clamp(aniVel * 10, 0, 1);
+            animator.SetFloat("Blend", aniVel);
+        }
     }
 
-    public void PlayDeath()
+    public void PlayDeathAnim()
     {
         animator.SetTrigger("Death");
+        isAlive = false;
+        Invoke("Death", 5.0f);
+    }
+
+    private void Death()
+    {
+        Destroy(this.gameObject);
     }
 }

@@ -9,13 +9,12 @@ public class HammerControls : MonoBehaviour
 
     public void KillTarget()
     {
-
         Collider[] hitColliders = Physics.OverlapBox(transform.position, transform.localScale, Quaternion.identity, m_LayerMask);
         if(hitColliders.Length > 0)
         {
             foreach (var collider in hitColliders)
             {
-                Destroy(collider.transform.parent.gameObject);
+                collider.GetComponentInParent<BanditControlls>().PlayDeathAnim();
             }
         }
     }

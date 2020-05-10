@@ -42,7 +42,6 @@ namespace Noble {
         // Start is called before the first frame update
         void Start() {
             controller = GetComponent<CharacterController>();
-            
         }
 
         // Update is called once per frame
@@ -69,9 +68,6 @@ namespace Noble {
             // leave this as last step
             controller.Move(currentVelocity * Time.fixedDeltaTime);
         }
-
-
-
 
         public void OnMove(InputValue input) {
             moveInput = input.Get<Vector2>();

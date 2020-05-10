@@ -11,6 +11,8 @@ namespace Noble {
 
     public class PlayerMovement : MonoBehaviour {
 
+        private int ANIM_VELOCITY = Animator.StringToHash("Velocity");
+
         [Header("Dependencies")]
         public Animator animator;
 
@@ -28,40 +30,44 @@ namespace Noble {
         // autowired
         private CharacterController controller;
         
-        private Vector3 prevPos;
 
         [Header("Runtime Values")]
         [SerializeField]
         private float angle;
+        [SerializeField]
         private Vector3 currentVelocity = Vector3.zero;
+        [SerializeField]
+        private Vector3 velNormalized = Vector3.zero;
 
         // Start is called before the first frame update
         void Start() {
             controller = GetComponent<CharacterController>();
-            prevPos = transform.position;
+            
         }
 
         // Update is called once per frame
         void FixedUpdate() {
             var vel = new Vector3();
-            vel.x = moveInput.x * speed * Time.fixedDeltaTime;
-            vel.z = moveInput.y * speed * Time.fixedDeltaTime;
-
+            vel.x = moveInput.x * speed;
+            vel.z = moveInput.y * speed;
+            vel.y = currentVelocity.y;
+            vel = transform.TransformDirection(vel);
 
             if (controller.isGrounded) {
-                currentVelocity.y = 0;
+                vel.y = 0;
             }
-            currentVelocity.y -= gravity * Time.fixedDeltaTime;
-            var angle = new Vector3();
-            angle.x = lookInput.x * turnSpeed * Time.fixedDeltaTime;
-            vel = transform.TransformDirection(vel);
-            currentVelocity = Vector3.Lerp(currentVelocity, vel, controlFactor * Time.fixedDeltaTime);
-            controller.Move(currentVelocity);
+            vel.y -= gravity;
 
-            float aniVel = Vector3.Magnitude(prevPos - transform.position);
-            aniVel = Mathf.Clamp(aniVel * 10, 0, 1);
-            animator.SetFloat("Velocity", aniVel);
-            prevPos = transform.position;
+            currentVelocity = Vector3.Lerp(currentVelocity, vel, controlFactor);
+            
+
+            // normally use the input. but since we slide we want to animate feet when sliding.
+            velNormalized = currentVelocity.normalized;
+            var animVel = Mathf.Max(Mathf.Abs(velNormalized.z), Mathf.Abs(velNormalized.x));
+            animator.SetFloat(ANIM_VELOCITY, animVel);
+
+            // leave this as last step
+            controller.Move(currentVelocity * Time.fixedDeltaTime);
         }
 
 

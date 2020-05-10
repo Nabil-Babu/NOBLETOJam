@@ -23,7 +23,7 @@ public class HammerControls : MonoBehaviour
         if (other.gameObject.transform.parent.tag == "Enemy")
         {
             Debug.Log("Kill Box Exited");
-            
+            killBoxOccupied = false;
         }
     }
 

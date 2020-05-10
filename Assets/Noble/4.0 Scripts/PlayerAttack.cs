@@ -18,11 +18,17 @@ public class PlayerAttack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        hammer = GetComponentInChildren<HammerControls>(); 
+        hammer = GetComponentInChildren<HammerControls>();
     }
 
     public void OnAttack(InputValue input) {
         animator.SetTrigger(ANIM_ATTACK_TRIGGER);
-        Debug.Log(hammer.killBoxOccupied);
+        Invoke("SwingHammer", 0.5f);
+        
+    }
+
+    public void SwingHammer()
+    {
+        hammer.KillTarget();
     }
 }

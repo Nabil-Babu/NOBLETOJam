@@ -19,9 +19,11 @@ public class BanditControlls : MonoBehaviour
 
 
     [Header("Dependencies")]
+    public LayerMask AttackingLayer;
     public Animator animator;
     public Transform player;
     private NavMeshAgent agent;
+    public GameObject attackPoint;
 
     // Start is called before the first frame update
     void Start()
@@ -33,21 +35,21 @@ public class BanditControlls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isAlive)
+        if (isAlive)
         {
             agent.destination = player.position;
             float aniVel = agent.velocity.magnitude;
             aniVel = Mathf.Clamp(aniVel * 10, 0, 1);
             animator.SetFloat("Blend", aniVel);
-            if(agent.remainingDistance < minAttackDistance && agent.remainingDistance > 0)
+            if (agent.remainingDistance < minAttackDistance && agent.remainingDistance > 0)
             {
-                if(!isAttacking)
+                if (!isAttacking)
                 {
                     Attack();
                     isAttacking = true;
-                    agent.isStopped = true; 
+                    agent.isStopped = true;
                 }
-            } 
+            }
             else
             {
                 agent.isStopped = false;
@@ -70,12 +72,28 @@ public class BanditControlls : MonoBehaviour
     private void Attack()
     {
         animator.SetTrigger("Attack");
+        Invoke("CheckForPlayer", 0.5f);
         StartCoroutine(AttackTimer());
     }
 
     IEnumerator AttackTimer()
     {
         yield return new WaitForSeconds(attackCoolDown);
-        isAttacking = false; 
+        isAttacking = false;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(attackPoint.transform.position, attackPoint.transform.localScale);
+    }
+
+    private void CheckForPlayer()
+    {
+        Collider[] hitColliders = Physics.OverlapBox(attackPoint.transform.position, attackPoint.transform.localScale, Quaternion.identity, AttackingLayer);
+        if (hitColliders.Length > 0)
+        {
+            Debug.Log("Hit Player");
+        }
     }
 }

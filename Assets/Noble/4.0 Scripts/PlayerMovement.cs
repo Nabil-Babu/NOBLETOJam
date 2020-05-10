@@ -11,6 +11,8 @@ namespace Noble {
 
     public class PlayerMovement : MonoBehaviour {
 
+        private int ANIM_VELOCITY = Animator.StringToHash("Velocity");
+
         [Header("Dependencies")]
         public Animator animator;
 
@@ -60,7 +62,7 @@ namespace Noble {
 
             float aniVel = Vector3.Magnitude(prevPos - transform.position);
             aniVel = Mathf.Clamp(aniVel * 10, 0, 1);
-            animator.SetFloat("Velocity", aniVel);
+            animator.SetFloat(ANIM_VELOCITY, aniVel);
             prevPos = transform.position;
         }
 

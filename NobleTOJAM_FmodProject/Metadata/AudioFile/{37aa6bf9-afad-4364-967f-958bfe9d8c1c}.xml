@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{37aa6bf9-afad-4364-967f-958bfe9d8c1c}">
+		<property name="assetPath">
+			<value>Human Impact-003.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.27768707482993199</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{19f87b61-268c-4d15-a432-46b49bc1bad9}</destination>
+		</relationship>
+	</object>
+</objects>

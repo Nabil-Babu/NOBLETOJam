@@ -1,0 +1,25 @@
+NOBLE AUDIO IMPLEMENTATION NOTES
+
+Baby Sad
+-Play random when baby falls down :(
+
+BGM
+-Looping background music
+
+Crowd AMB
+-Looping ambience
+
+Crowd Boo
+-Play when baby falls down :(
+
+Crowd Cheer
+-Play when baby gets back on Giant's shoulders
+
+Footsteps
+-Movement!
+
+Hammer Impact
+-Play random when hammer hits man.
+
+Hammer Swing
+-Play random when hammer swung (swang? swinged?)

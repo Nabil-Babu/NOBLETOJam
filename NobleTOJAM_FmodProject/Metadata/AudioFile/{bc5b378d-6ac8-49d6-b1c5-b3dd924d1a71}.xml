@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{bc5b378d-6ac8-49d6-b1c5-b3dd924d1a71}">
+		<property name="assetPath">
+			<value>goat bleat-001.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.6547392290249433</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{19f87b61-268c-4d15-a432-46b49bc1bad9}</destination>
+		</relationship>
+	</object>
+</objects>

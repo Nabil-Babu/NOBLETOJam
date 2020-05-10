@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{24bf6def-e4dd-46f1-8101-b409f405f31e}">
+		<property name="assetPath">
+			<value>Proviant_Audio_-_07_-_The_Smalltalker.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>185.02530612244897</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{19f87b61-268c-4d15-a432-46b49bc1bad9}</destination>
+		</relationship>
+	</object>
+</objects>
